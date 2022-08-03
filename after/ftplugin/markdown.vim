@@ -148,7 +148,7 @@ else " vim_markdown_folding_style_pythonic == 0
                 if a:lnum == line('$')
                     return matchend(l1, '^#\+') - 1
                 else
-                    return -1
+                    return '>'.matchend(l1, '^#\+')
                 endif
             else
                 " headers are not folded
@@ -156,13 +156,7 @@ else " vim_markdown_folding_style_pythonic == 0
             endif
         endif
 
-        if l0 =~# '^#' && !s:is_mkdCode(a:lnum-1)
-            " previous line starts with hashes
-            return '>'.matchend(l0, '^#\+')
-        else
-            " keep previous foldlevel
-            return '='
-        endif
+        return '='
     endfunction
 endif
 
